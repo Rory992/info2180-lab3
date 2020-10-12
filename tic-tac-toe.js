@@ -13,7 +13,7 @@ function layout(){
 
  window.onload = layout;
  
-let x_o = 0;
+let turn = 0;
 
 function assign(){
     let position = window.document.getElementById("board").children;
@@ -22,19 +22,19 @@ function assign(){
         let box = position[i];
 
         box.onclick = function(){
-            if(x_o%2==0 && box.innerHTML==""){
+            if(turn%2==0 && box.innerHTML==""){
                 box.innerHTML = "X";
                 box.classList.add("square", "X");
                 winner();
-                x_o+=1;
+                turn+=1;
             }
-            else if (x_o&2==1 && box.innerHTML==""){
+            else if (turn%2==1 && box.innerHTML==""){
                 box.innerHTML = "O";
                 box.classList.add("square", "O");
                 winner();
-                x_o+=1;
+                turn+=1;
             }
-        }
+        };
     }
 }
 
@@ -70,10 +70,10 @@ function win(){
         position[i].removeAttribute("onClick");
     }
 
-    if(x_o%2==0) {
+    if(turn%2==0) {
         status.innerHTML = "Congratulations! X is the Winner!";
         status.classList.add("you-won");
-    } else if(x_o%2==1){
+    } else if(turn%2==1){
         status.innerHTML = "Congratulations! O is the Winner!";
         status.classList.add("you-won");
     }else{
@@ -108,7 +108,7 @@ function winner(){
 }
 
 function reset(){
-    x_o = 0;  
+    turn = 0;  
     let position = window.document.getElementById("board").children;    
     
     for(let i=0;i<position.length;i++){
