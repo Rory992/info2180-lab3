@@ -3,11 +3,11 @@ function layout(){
      
      for(let i = 0; i<content.length; i++){
          content[i].setAttribute("class", "square");
-         content[i].setAttribute("onClick", "assign()");
-         content[i].setAttribute("mouseOn", "hover()");
-         content[i].setAttribute("mouseOut", "hoverOff()");
+         content[i].setAttribute("onclick", "assign()");
+         content[i].setAttribute("onmouseover", "hover()");
+         content[i].setAttribute("onmouseout", "noHover()");
      } 
-     let btn = document.getElementById("button");   
+     let btn = document.getElementsByClassName("btn");   
      btn[0].addEventListener("click", reset);
  }
 
@@ -27,7 +27,8 @@ function assign(){
                 box.classList.add("square", "X");
                 winner();
                 x_o+=1;
-            }else if (x_o&2==1 && box.innerHTML==""){
+            }
+            else if (x_o&2==1 && box.innerHTML==""){
                 box.innerHTML = "O";
                 box.classList.add("square", "O");
                 winner();
@@ -43,19 +44,19 @@ function hover(){
     for(let i =0; i<position.length; i++){
         let box = position[i];
         
-        box.mouseOn = function(){
+        box.onmouseover = function(){
             box.classList.add("hover");
         }
     }
 }
 
-function hoverOff(){
+function noHover(){
     let position = window.document.getElementById("board").children;
 
     for(let i =0; i<position.length; i++){
         let box = position[i];
         
-        box.mouseOut = function(){
+        box.onmouseout = function(){
             box.classList.remove("hover");
         }
     }
@@ -112,7 +113,7 @@ function reset(){
     
     for(let i=0;i<position.length;i++){
         position[i].innerHTML = "";
-        position[i].setAttribute("onClick", "assign()");
+        position[i].setAttribute("onclick", "assign()");
         position[i].classList.remove("X");
         position[i].classList.remove("O");
     }
